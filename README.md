@@ -4,6 +4,7 @@
 This serves as a first-step of Nevada Child Fatality pdfs and moves into a consistent csv schema across counties in Nevada.
 
 ### Directory Structure
+`Run: $ python main.py`
 ```
 ├── state_of_nv_child_fatalities
       ├───config                              # hardcoded urls, paths and values
@@ -23,7 +24,9 @@ This serves as a first-step of Nevada Child Fatality pdfs and moves into a consi
 **Example Single PDF:**  [Near fatality marijuana access](https://dcfs.nv.gov/uploadedFiles/dcfsnvgov/content/Programs/CWS/CPS/ChildFatalities/Clark/2023/2023-01-17_ID_1469166.pdf)  
 ![image](https://github.com/kevinkurek/state_of_nv_child_fatalities/assets/28911996/219f4f12-a82b-4f9f-9c4a-a79a4c83682e)  
 
-**Output Table for Clark.**
+**Output Table for Clark.**     
+`output_files/child_fatality_Clark.csv`
+
 ![image](https://github.com/kevinkurek/state_of_nv_child_fatalities/assets/28911996/9360689d-e655-43f3-98ce-4a8891274e6c)
 
 
