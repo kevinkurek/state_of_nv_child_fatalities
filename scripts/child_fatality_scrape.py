@@ -33,7 +33,7 @@ def download_all_pdfs(url):
                 
     # directory pdfs will be saved
     county = url.split('/')[-2]
-    save_dir = f'C:/Users/kkurek/OneDrive - State of Nevada/Desktop/DCFS_Child/{county}_pdfs'
+    save_dir = f'./output_files/{county}_pdfs'
     
     # UNIQUE: this uploadedFiles path is required, why?
     # Due to the level of inconsistency in the pdf formats between counties
@@ -344,11 +344,11 @@ def cleaning_df(df_list, rename_cols, time_cols):
     df = df.sort_values(by='date', ascending=False).reset_index(drop=True)
     
     # create zip code, if zip is not a 5 digit integer set to np.nan
-    df['agency_zip'] = df['agency_address'].apply(lambda x: x.split()[-1] if re.match("^\d{5}$", x.split()[-1]) else np.nan)
+    # df['agency_zip'] = df['agency_address'].apply(lambda x: x.split()[-1] if re.match("^\d{5}$", x.split()[-1]) else np.nan)
 
     # Apply the function to the zip column and create a new column 'city'
     # non-trivial because PDF has a lot of human error so we have to use the zipcodes package
-    df['agency_city'] = df['agency_zip'].apply(get_city_by_zip)
+    # df['agency_city'] = df['agency_zip'].apply(get_city_by_zip)
     
     return df
 
@@ -399,7 +399,7 @@ def run(url, keys, rename_cols, time_cols):
     
     # save final csv per county
     county = url.split('/')[-2]
-    csv_filename = f"child_fatality_{county}.csv"
+    csv_filename = f"./output_files/child_fatality_{county}.csv"
     final_df.to_csv(csv_filename, index=False)
     print(f"Saved {csv_filename}")
     
@@ -409,7 +409,7 @@ def run(url, keys, rename_cols, time_cols):
                 
 if __name__ == "__main__":
     
-    import config
+    import config.CONFIG as CONFIG
     
     # Clark
     # run(url=config.URL1, 
@@ -418,10 +418,10 @@ if __name__ == "__main__":
     #     time_cols=config.TIME_COLS)
     
     # Rural (smallest to debug on)
-    run(url=config.URL2, 
-            keys=config.KEYS, 
-            rename_cols=config.RENAME_COLS, 
-            time_cols=config.TIME_COLS)
+    run(url=CONFIG.URL2, 
+            keys=CONFIG.KEYS, 
+            rename_cols=CONFIG.RENAME_COLS, 
+            time_cols=CONFIG.TIME_COLS)
 
     # Washoe
     # run(url=config.URL3, 

@@ -1,2 +1,5 @@
 *.pdf
 *.ipynb_checkpoints/
+*__pycache__
+*.tox
+*.pytest_cache
