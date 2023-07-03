@@ -1,8 +1,3 @@
-# Config for childfatalityscrape.py debugging a single url
-URL1 = 'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Clark/'
-URL2 = 'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Rural/'
-URL3 = 'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Washoe/'
-
 # Full config for main.py
 URL_LIST = ['https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Clark/',
             'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Rural/',
@@ -49,3 +44,8 @@ TIME_COLS = ['date',
          'date_of_written_notification', 
          'child_fatality_date_of_death', 
          'near_fatality_date']
+
+# Config for childfatalityscrape.py debugging a single url
+URL1 = 'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Clark/'
+URL2 = 'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Rural/'
+URL3 = 'https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Washoe/'
