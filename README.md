@@ -4,7 +4,7 @@
 This serves as a first-step of Nevada Child Fatality pdfs and moves into a consistent csv schema across counties in Nevada.
 
 ### Directory Structure
-`Run: $ python main.py`
+`Local Run: $ python main.py`
 ```
 ├── state_of_nv_child_fatalities
       ├───config                              # hardcoded urls, paths and values
@@ -15,7 +15,8 @@ This serves as a first-step of Nevada Child Fatality pdfs and moves into a consi
       ├───tests                               # unit tests of python functions
       ├── main.py                             # file that runs python code in scripts folder
       ├── requirements.txt                    # package requirements
-      └── tox.ini                             # Test runner for multi-environment Python testing
+      ├── tox.ini                             # Test runner for multi-environment Python testing
+      └── Dockerfile                          # Docker build image, run tox, execute main.py
 ```
 
 **Example:**  
@@ -32,6 +33,7 @@ This serves as a first-step of Nevada Child Fatality pdfs and moves into a consi
 ### Docker Instructions
 
 ```
+Docker Run:
 $ docker build -t child_fatalities .                                      # build docker image
 $ docker run -d --name child_fatalities_container child_fatalities        # run container & actual python
 $ docker ps                                                               # confirm you see container running
