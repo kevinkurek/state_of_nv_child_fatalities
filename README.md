@@ -29,4 +29,12 @@ This serves as a first-step of Nevada Child Fatality pdfs and moves into a consi
 
 ![image](https://github.com/kevinkurek/state_of_nv_child_fatalities/assets/28911996/9360689d-e655-43f3-98ce-4a8891274e6c)
 
-
+**Docker Instructions**
+```
+docker build -t child_fatalities .                                      # build docker image
+docker run -d --name child_fatalities_container child_fatalities        # run container & actual python
+docker ps                                                               # confirm you see container running
+docker exec -it child_fatalities_container /bin/bash                    # look inside container
+    $ cd output_files && ls                                             # view output csv files after container has ran
+docker logs child_fatalities_container                                  # look at internal print statements/logs
+```

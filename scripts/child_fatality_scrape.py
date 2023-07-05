@@ -264,12 +264,12 @@ def loop_pdf_scrape(
     """
 
     df_list = []
-    for file in file_list:
+    for pdf_file in file_list:
 
         # make sure full directory is appended before opening
-        file = path + "\\" + file
+        pdf_file = path + "/" + pdf_file
 
-        with pdfplumber.open(file) as pdf:
+        with pdfplumber.open(pdf_file) as pdf:
             # Extract text from each page
             pages_text = [page.extract_text() for page in pdf.pages]
             individual_df = scrape_individual_pdf(pages_text, keys)
