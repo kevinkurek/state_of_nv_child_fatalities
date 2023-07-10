@@ -34,7 +34,7 @@ def download_all_pdfs(url: str) -> str:
 
     # directory pdfs will be saved
     county = url.split("/")[-2]
-    save_dir = f"./output_files/{county}_pdfs"
+    save_dir = os.path.join(".", "output_files", f"{county}_pdfs")  # use os.path.join for OS compatibility
 
     # UNIQUE: this uploadedFiles path is required, why?
     # Due to the level of inconsistency in the pdf formats between counties
