@@ -3,8 +3,16 @@
 
 This serves as a first-step of Nevada Child Fatality pdfs and moves into a consistent csv schema across counties in Nevada.
 
+### Env setup (recommended but not required)
+```
+$ conda create --name child_nv python=3.10      # create python3.10 virtual env
+$ conda activate child_nv                       # turn on virtual env
+$ pip install tox                               # install tox
+$ tox                                           # run tox: installs requirements.txt & runs pytests
+```
+### Local Run
+`$ python main.py  # run primary pdf scraper per county (don't need virtual env to run this)`
 ### Directory Structure
-`Local Run: $ python main.py`
 ```
 ├── state_of_nv_child_fatalities
       ├───config                              # hardcoded urls, paths and values
