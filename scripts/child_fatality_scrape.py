@@ -424,9 +424,6 @@ def run(
     save_dir = download_all_pdfs(url)
     print("Done downloading all pdfs")
 
-    # Call the function to create a list of all pdfs from directory
-    file_list = list_files(path=save_dir)
-
     # list all local pdfs
     file_list = list_files(path=save_dir)
     print(len(file_list))
