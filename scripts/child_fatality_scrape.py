@@ -34,7 +34,9 @@ def download_all_pdfs(url: str) -> str:
 
     # directory pdfs will be saved
     county = url.split("/")[-2]
-    save_dir = os.path.join(".", "output_files", f"{county}_pdfs")  # use os.path.join for OS compatibility
+    save_dir = os.path.join(
+        ".", "output_files", f"{county}_pdfs"
+    )  # use os.path.join for OS compatibility
 
     # UNIQUE: this uploadedFiles path is required, why?
     # Due to the level of inconsistency in the pdf formats between counties
@@ -313,16 +315,18 @@ def get_city_by_zip(zip_code: str) -> str:
     # If no result was found, return np.nan
     return np.nan
 
+
 def parse_dob_gender(value):
     # First, we find DOB by searching for a pattern that looks like a date
-    dob_match = re.search(r'\d{1,2}[-/]\d{1,2}[-/]\d{2,4}', value)
+    dob_match = re.search(r"\d{1,2}[-/]\d{1,2}[-/]\d{2,4}", value)
     dob = dob_match.group(0) if dob_match else None
 
     # Next, we look for gender by checking for the words "male" or "female" (case insensitive)
-    gender_match = re.search(r'male|female', value, re.IGNORECASE)
+    gender_match = re.search(r"male|female", value, re.IGNORECASE)
     gender = gender_match.group(0) if gender_match else None
 
     return pd.Series([dob, gender])
+
 
 def cleaning_df(
     df_list: List[pd.DataFrame], rename_cols: Dict[str, str], time_cols: List[str]
@@ -377,7 +381,7 @@ def cleaning_df(
     df = df.drop([col1], axis=1)
 
     # separate DOB & gender into their own columns
-    df[['DOB', 'gender']] = df['date_of_birth_and_gender'].apply(parse_dob_gender)
+    df[["DOB", "gender"]] = df["date_of_birth_and_gender"].apply(parse_dob_gender)
 
     # sort values by date, newest at top
     df = df.sort_values(by="date", ascending=False).reset_index(drop=True)
@@ -449,9 +453,11 @@ def run(
 
 if __name__ == "__main__":
     import sys
+
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
     import config.CONFIG as CONFIG
+
     # from config import CONFIG
     # from state.config import CONFIG
     # from state_of_
