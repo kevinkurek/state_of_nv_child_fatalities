@@ -2,9 +2,9 @@ import time
 import config.CONFIG as CONFIG
 from scripts.child_fatality_scrape import run
 
+
 # run for Clark, Washoe, and Rural Nevada
 def main():
-
     # Start the timer
     start_time = time.time()
 

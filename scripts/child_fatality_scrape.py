@@ -50,7 +50,6 @@ def download_all_pdfs(url: str) -> str:
     for link in links:
         href = link.get("href")
         if href and upload_href in href and href.endswith(".pdf"):
-
             # append needed dcfs link since pdf hrefs don't come naturally with it
             prefix_for_href = "https://dcfs.nv.gov/"
             href = prefix_for_href + href
@@ -267,7 +266,6 @@ def loop_pdf_scrape(
 
     df_list = []
     for pdf_file in file_list:
-
         # make sure full directory is appended before opening
         pdf_file = path + "/" + pdf_file
 
