@@ -49,3 +49,33 @@ $ docker exec -it child_fatalities_container /bin/bash                    # look
     $ cd output_files && ls                                               # view output csv files after container finishes
 $ docker logs child_fatalities_container                                  # look at internal print statements/logs
 ```
+
+```
+Docker Reset
+WARNING: Only do this to start from scratch, it will delete **all** images & containers.
+
+Stop & delete containers:
+$ docker stop $(docker ps -aq)
+$ docker rm $(docker ps -aq)
+
+Remove all images:
+$ docker rmi $(docker images -aq)
+
+Remove any dangling/unused images:
+$ docker system prune -a -f
+```
+
+### Upload to Google Cloud Platform (GCP)
+Note: Google's Container Registry is being deprecated so now images will live in Artifact Registry
+```
+1. Create a .env file at the project root
+2. Create & set 3 env variables inside .env: GCP_PROJECT_ID, GCP_SERVICE_ACCOUNT_KEY_PATH, TAG (example: TAG="v1.0")
+3. Run bash script
+$ ./build_and_push.sh
+    Note: If you get a permission error run: 
+    $ chmod +x build_and_push.sh
+    $ ./build_and_push.sh
+
+4. Answer "yes" to any potential prompts
+5. Check the image uploaded successfully: GCP -> Artifact Registry -> Repositories -> gcr.io.
+```
