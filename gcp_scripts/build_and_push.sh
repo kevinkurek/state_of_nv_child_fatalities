@@ -7,10 +7,8 @@ source .env
 gcloud config set project $GCP_PROJECT_ID
 gcloud auth activate-service-account --key-file=$GCP_SERVICE_ACCOUNT_KEY_PATH
 
-# Get the current date in the format "YYYYMMDD"
-CURRENT_DATE=$(date "+%Y%m%d")
-
 # Concatenate GCP_PROJECT_ID and DATE to form IMAGE_NAME
+CURRENT_DATE=$(date "+%Y%m%d")
 IMAGE_NAME="$GCP_PROJECT_ID-$CURRENT_DATE"
 
 # Build the Docker image

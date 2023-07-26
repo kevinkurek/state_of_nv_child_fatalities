@@ -80,3 +80,10 @@ $ ./build_and_push.sh
 4. Answer "yes" to any potential prompts
 5. Check the image uploaded successfully: GCP -> Artifact Registry -> Repositories -> gcr.io.
 ```
+
+### Run inside GCP (roughly)
+1. Containerize the application as in the "Upload to Google Cloud Platform" section above.
+2. Configure a Cloud Run Service inside GCP
+3. Deploy Cloud Run Service.
+4. Create Cloud Function and select "Cloud Run" trigger; select your Cloud Run Service.
+5. 
