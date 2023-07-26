@@ -82,6 +82,7 @@ $ ./build_and_push.sh
 ```
 
 ### Run inside GCP (roughly)
+
 1. Containerize the application as in the "Upload to Google Cloud Platform" section above.
 2. Configure a Cloud Run Service inside GCP
 3. Deploy Cloud Run Service.
