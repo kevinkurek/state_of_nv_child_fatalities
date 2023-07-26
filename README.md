@@ -86,4 +86,4 @@ $ ./build_and_push.sh
 2. Configure a Cloud Run Service inside GCP
 3. Deploy Cloud Run Service.
 4. Create Cloud Function and select "Cloud Run" trigger; select your Cloud Run Service.
-5. 
+5. Set a scheduler job.
