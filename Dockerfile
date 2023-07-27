@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN tox
 
 # Set the main.py script as the default command for the container
-CMD ["python", "main.py"]
+CMD ["python", "flask_main.py"]
