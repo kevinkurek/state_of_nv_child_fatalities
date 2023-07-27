@@ -64,6 +64,7 @@ Remove any dangling/unused images:
 $ docker system prune -a -f
 ```
 
+### Still in Dev for GCP ideal workflow (below this line.)
 ### Upload to Google Cloud Platform (GCP)
 Note: Google's Container Registry is being deprecated so now images will now live in Artifact Registry.
 ```
