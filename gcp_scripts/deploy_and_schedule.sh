@@ -13,4 +13,4 @@ URL=$(gcloud run services describe $SERVICE --region $REGION --format 'value(sta
 SERVICE_ACCOUNT_EMAIL=$(grep -o '"client_email": "[^"]*' $GCP_SERVICE_ACCOUNT_KEY_PATH | awk -F'"' '{print $4}')
 
 # Create a Cloud Scheduler job that invokes the Cloud Run service
-gcloud scheduler jobs create http $JOB --schedule="*/5 * * * *" --http-method=GET --uri=$URL --oidc-service-account-email=$SERVICE_ACCOUNT_EMAIL
+gcloud scheduler jobs create http $JOB --schedule="*/5 * * * *" --http-method=GET --uri=$URL --oidc-service-account-email=$SERVICE_ACCOUNT_EMAIL --location=$REGION

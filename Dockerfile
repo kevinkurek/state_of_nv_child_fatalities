@@ -13,5 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Run tox
 RUN tox
 
-# Set the main.py script as the default command for the container
+# Set the flask application script as the default command for the container
+# Flask will run on port 8080
+ENV PORT 8080
 CMD ["python", "flask_main.py"]
