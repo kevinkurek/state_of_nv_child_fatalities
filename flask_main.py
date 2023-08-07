@@ -7,7 +7,8 @@ from scripts.child_fatality_scrape import run
 # Create a Flask app
 app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/")
 def main():
     # Start the timer
     start_time = time.time()
@@ -27,7 +28,7 @@ def main():
 
     return "Done", 200
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     # TODO: Turn into production server after debugging
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
