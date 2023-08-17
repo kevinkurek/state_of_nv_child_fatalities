@@ -12,6 +12,13 @@
 # below:
 .git
 .gitignore
+.tox
+.pytest_cache
+*__pycache__
+Dockerfile
+flask_main.py
+README.md
+tox.ini
 
 node_modules
 #!include:.gitignore
