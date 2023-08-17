@@ -21,7 +21,7 @@ def main():
     elapsed_time = time.time() - start_time
     print(f"Execution time for main.py: {round(elapsed_time,2)} seconds")
 
-    return "Done"
+    return "Done", 200
 
 
 if __name__ == "__main__":
