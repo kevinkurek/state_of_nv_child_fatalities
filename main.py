@@ -1,4 +1,5 @@
 import time
+import pandas as pd
 import config.CONFIG as CONFIG
 from scripts.child_fatality_scrape import run
 

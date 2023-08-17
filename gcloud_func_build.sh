@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Navigate to the directory containing main.py & .env
-cd ..
-
 # Check if .env exists
 if [ ! -f .env ]; then
     echo ".env file not found!"
@@ -21,7 +18,8 @@ gcloud functions deploy $FUNCTION_NAME \
 --runtime python310 \
 --trigger-http \
 --entry-point main \
---allow-unauthenticated
+--allow-unauthenticated \
+--source .
 
 # Check deployment status
 if [ $? -eq 0 ]; then
