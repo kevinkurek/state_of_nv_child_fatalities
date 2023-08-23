@@ -5,4 +5,3 @@
 *__pycache__
 *.tox
 *.pytest_cache
-*.txt

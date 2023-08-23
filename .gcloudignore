@@ -10,8 +10,8 @@
 # If you would like to upload your .git directory, .gitignore file or files
 # from your .gitignore file, remove the corresponding line
 # below:
-.git
-.gitignore
+# .git
+# .gitignore
 .tox
 .pytest_cache
 *__pycache__
@@ -19,6 +19,10 @@ Dockerfile
 flask_main.py
 README.md
 tox.ini
+/gcp_scripts
+/tests
+/research
+/output_files
 
-node_modules
+# node_modules
 #!include:.gitignore

@@ -15,11 +15,14 @@ gcloud auth activate-service-account --key-file=$GCP_SERVICE_ACCOUNT_KEY_PATH
 
 # Deploy the function using gcloud
 gcloud functions deploy $FUNCTION_NAME \
---runtime python310 \
+--runtime=python310 \
 --trigger-http \
---entry-point main \
+--entry-point=main \
 --allow-unauthenticated \
---source .
+--source=. \
+# --memory=256MB
+# --gen2 \
+# --region=$REGION \
 
 # Check deployment status
 if [ $? -eq 0 ]; then
