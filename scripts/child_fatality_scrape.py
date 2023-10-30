@@ -403,7 +403,7 @@ def cleaning_df(
     return df
 
 
-def run(
+def run_pdf_scraping(
     url: str, keys: List[str], rename_cols: Dict[str, str], time_cols: List[str]
 ) -> None:
     """
@@ -470,7 +470,7 @@ if __name__ == "__main__":
     # from state_of_
 
     # Rural (smallest to debug on)
-    run(
+    run_pdf_scraping(
         url=CONFIG.URL2,
         keys=CONFIG.KEYS,
         rename_cols=CONFIG.RENAME_COLS,

@@ -2,7 +2,7 @@ import os
 import time
 from flask import Flask
 import config.CONFIG as CONFIG
-from scripts.child_fatality_scrape import run
+from scripts.child_fatality_scrape import run_pdf_scraping
 
 # Create a Flask app
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def main():
 
     for url in CONFIG.URL_LIST:
         print(f"Getting info from: {url}")
-        run(
+        run_pdf_scraping(
             url=url,
             keys=CONFIG.KEYS,
             rename_cols=CONFIG.RENAME_COLS,

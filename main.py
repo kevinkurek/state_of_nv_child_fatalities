@@ -1,7 +1,8 @@
 import time
 import pandas as pd
 import config.CONFIG as CONFIG
-from scripts.child_fatality_scrape import run
+from scripts.child_fatality_scrape import run_pdf_scraping
+from scripts.prior_history import run_prior_history_counts
 
 
 # run for Clark, Washoe, and Rural Nevada
@@ -11,12 +12,14 @@ def main():
 
     for url in CONFIG.URL_LIST:
         print(f"Getting info from: {url}")
-        run(
+        run_pdf_scraping(
             url=url,
             keys=CONFIG.KEYS,
             rename_cols=CONFIG.RENAME_COLS,
             time_cols=CONFIG.TIME_COLS,
         )
+
+    run_prior_history_counts()
 
     # Calculate the elapsed time
     elapsed_time = time.time() - start_time
