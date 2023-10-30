@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 import pdfplumber
 import zipcodes
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 
 def download_all_pdfs(url: str) -> str:
@@ -72,7 +72,7 @@ def download_all_pdfs(url: str) -> str:
     return save_dir
 
 
-def list_files(path: str) -> List[str]:
+def list_files(path: str, append_base_path: Optional[bool]) -> List[str]:
     """
     Lists all files in a specified directory.
 
@@ -90,7 +90,10 @@ def list_files(path: str) -> List[str]:
     files = []
     for file in os.listdir(path):
         if os.path.isfile(os.path.join(path, file)):
-            files.append(file)
+            if not append_base_path:
+                files.append(file)
+            else:
+                files.append(os.path.join(path, file))
 
     return files
 
