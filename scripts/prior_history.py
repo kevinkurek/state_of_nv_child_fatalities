@@ -128,6 +128,18 @@ def merge_and_save_csv(directory):
         # some that don't span multi-pages end up with -1 and needs to be a zero instead
         merged_df['prior_cases_count'] = merged_df['prior_cases_count'].replace(-1, 0)
         # print(merged_df.head())
+
+        # Get a list of all column names
+        columns = list(merged_df.columns)
+
+        # Remove 'prior_cases_count' from the list
+        columns.remove('prior_cases_count')
+
+        # Insert 'prior_cases_count' at the desired new position (index 2 for the third position, as indexing starts at 0)
+        columns.insert(2, 'prior_cases_count')
+
+        # Reindex the DataFrame with the new column order
+        merged_df = merged_df[columns]
         
         # Construct the output filename
         output_filename = f"{region_name}_merged.csv"
