@@ -173,7 +173,7 @@ def merge_dicts(data: Dict[str, str], new_dict: Dict[str, str]) -> Dict[str, str
     return data
 
 
-def scrape_individual_pdf(pages_text: List[str], keys: List[str]) -> pd.DataFrame:
+def scrape_individual_pdf(pages_text: List[str], pdf_file, keys: List[str]) -> pd.DataFrame:
     """
     Scrapes text from each page of a PDF document and organizes it into a dictionary,
     which is then turned into a pandas DataFrame.
@@ -240,6 +240,12 @@ def scrape_individual_pdf(pages_text: List[str], keys: List[str]) -> pd.DataFram
     # Now you can create a DataFrame from your data
     df = pd.DataFrame(data, index=[0])
 
+    # add original region & pdf file as first columns
+    original_pdf = pdf_file.split("/")[-1] # 2022-04-15_ID_1488030.pdf
+    original_region = pdf_file.split("/")[-2].split("_")[0] # Clark, Washoe, Rural
+    df.insert(0, "original_pdf", original_pdf)
+    df.insert(0, "original_region", original_region)
+
     # Replace empty strings with NaN
     df.replace("", np.nan, inplace=True)
 
@@ -270,12 +276,12 @@ def loop_pdf_scrape(
     df_list = []
     for pdf_file in file_list:
         # make sure full directory is appended before opening
-        pdf_file = path + "/" + pdf_file
+        full_file_path = path + "/" + pdf_file
 
-        with pdfplumber.open(pdf_file) as pdf:
+        with pdfplumber.open(full_file_path) as pdf:
             # Extract text from each page
             pages_text = [page.extract_text() for page in pdf.pages]
-            individual_df = scrape_individual_pdf(pages_text, keys)
+            individual_df = scrape_individual_pdf(pages_text, full_file_path, keys)
             df_list.append(individual_df)
 
     return df_list
@@ -430,7 +436,7 @@ def run(
     print("Done downloading all pdfs")
 
     # list all local pdfs
-    file_list = list_files(path=save_dir)
+    file_list = list_files(path=save_dir, append_base_path=False)
     print(len(file_list))
 
     # scrape each individual pdf from file_list: takes about 35 seconds for Clark County
