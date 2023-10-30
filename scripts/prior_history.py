@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import fitz  # PyMuPDF
 import re
-from child_fatality_scrape import *
+from .child_fatality_scrape import *
 
 # Function to count dates in the "G." section of a PDF
 def count_dates_in_g_section(pdf_data):
@@ -125,6 +125,8 @@ def merge_and_save_csv(directory):
                              df_prior_counts[['original_region', 'original_pdf', 'prior_cases_count']],
                              on=['original_region', 'original_pdf'], how='left')
         
+        # some that don't span multi-pages end up with -1 and needs to be a zero instead
+        merged_df['prior_cases_count'] = merged_df['prior_cases_count'].replace(-1, 0)
         # print(merged_df.head())
         
         # Construct the output filename
@@ -136,16 +138,16 @@ def merge_and_save_csv(directory):
         merged_df.to_csv(output_filepath, index=False)
         print(f"Saved merged file to {output_filepath}")
 
-def run_prior_history_counts():
+def run_and_merge_prior_history_counts(directory):
 
     # creates an output csv for each dataframe of counts
-    dataframe_for_each_region("../output_files/")
+    dataframe_for_each_region(directory)
 
     # merge original fatality scraping and newly created prior history counts together
-    merge_and_save_csv("../output_files/")
+    merge_and_save_csv(directory)
 
 
 if __name__ == "__main__":
 
-    run_prior_history_counts()
+    run_and_merge_prior_history_counts()
 

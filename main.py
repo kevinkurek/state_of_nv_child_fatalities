@@ -2,7 +2,7 @@ import time
 import pandas as pd
 import config.CONFIG as CONFIG
 from scripts.child_fatality_scrape import run_pdf_scraping
-from scripts.prior_history import run_prior_history_counts
+from scripts.prior_history import run_and_merge_prior_history_counts
 
 
 # run for Clark, Washoe, and Rural Nevada
@@ -19,7 +19,8 @@ def main():
             time_cols=CONFIG.TIME_COLS,
         )
 
-    run_prior_history_counts()
+    # Runs prior history count extraction and merges with csvs from run_pdf_scraping
+    run_and_merge_prior_history_counts(directory="./output_files/")
 
     # Calculate the elapsed time
     elapsed_time = time.time() - start_time
