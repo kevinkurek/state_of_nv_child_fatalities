@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import pdfplumber
 import zipcodes
 from typing import List, Dict, Optional
+import config.CONFIG as CONFIG
 
 
 def download_all_pdfs(url: str) -> str:
@@ -403,7 +404,7 @@ def cleaning_df(
     return df
 
 
-def run_pdf_scraping(
+def run_pdf_scraping_URL(
     url: str, keys: List[str], rename_cols: Dict[str, str], time_cols: List[str]
 ) -> None:
     """
@@ -431,20 +432,9 @@ def run_pdf_scraping(
     # Start the timer
     start_time = time.time()
 
-
-    # TODO: 
-
-    # if all pdfs are already inside of a folder, you can bypass running download_all_pdfs
-
-
     # takes about 2 min to download all files from url for Clark County
     save_dir = download_all_pdfs(url)
     print("Done downloading all pdfs")
-
-
-
-
-
 
     # list all local pdfs
     file_list = list_files(path=save_dir, append_base_path=False)
@@ -467,6 +457,60 @@ def run_pdf_scraping(
     # Calculate the elapsed time
     elapsed_time = time.time() - start_time
     print(f"Execution time for {county}: {round(elapsed_time,2)} seconds")
+
+
+def full_data_path_prep(county_folder, test_year='2023'):
+
+    all_years_list = os.listdir(county_folder)
+    # print(all_years_list)
+
+    for year_folder in all_years_list:
+        # print(year_folder)
+
+        if year_folder == test_year:
+
+            county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
+
+            # Use a list comprehension to filter for files with a ".pdf" extension
+            all_county_year_items = os.listdir(county_year_path)
+            pdf_files_list = [item for item in all_county_year_items if item.lower().endswith('.pdf')]
+
+    return pdf_files_list
+
+
+def run_pdf_scraping_FOLDER(
+    county_folder: str, keys: List[str], rename_cols: Dict[str, str], time_cols: List[str]
+) -> None:
+
+    # Start the timer
+    start_time = time.time()
+
+    pdf_files_list = full_data_path_prep(county_folder)
+
+    # TODO: Temp Kev_Dev directory for storing a list of dataframes
+    save_dir = os.path.join(county_folder, "Kev_Dev")
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    # scrape each individual pdf from file_list: takes about 35 seconds for Clark County
+    df_list = loop_pdf_scrape(pdf_files_list, path=save_dir, keys=keys)
+    print("Done scraping pdfs")
+
+    # concatenate final list of dataframes, clean, and sort dataframe
+    final_df = cleaning_df(df_list, rename_cols, time_cols)
+    print(final_df.shape)
+
+    # save final csv per county
+    county = county_folder.split("\\")[-1]
+    csv_filename = f"./output_files/child_fatality_{county}.csv"
+    final_df.to_csv(csv_filename, index=False)
+    print(f"Saved {csv_filename}")
+
+    # Calculate the elapsed time
+    elapsed_time = time.time() - start_time
+    print(f"Execution time for {county}: {round(elapsed_time,2)} seconds")
+
+
 
 
 if __name__ == "__main__":

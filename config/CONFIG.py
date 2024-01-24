@@ -1,9 +1,23 @@
-# Full config for main.py
+import os
+from dotenv import load_dotenv
+
+# Load the environment variables from the .env file
+load_dotenv('.env')
+FULL_DATA_PATH = os.getenv("FULL_DATA_PATH")# Full config for main.py
+
+# used in main to run all urls
 URL_LIST = [
     "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Clark/",
     "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Rural/",
     "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Washoe/",
-]  # used in main to run all urls
+]  
+
+# TODO: bad practice to have python inside config, but ok for dev/debugging
+FULL_PATH_COUNTIES = [
+    os.path.join(fr"{FULL_DATA_PATH}", "Clark"),
+    os.path.join(fr"{FULL_DATA_PATH}", "Rural"),
+    os.path.join(fr"{FULL_DATA_PATH}", "Clark"),
+]  # used in main to run all folder paths if given
 
 # Define the keys you want to extract
 KEYS = [
