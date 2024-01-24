@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Define variables
-DOCKER_IMAGE_NAME="your-docker-image-name"
-DOCKER_IMAGE_TAG="your-tag"
-AWS_REGION="your-aws-region"
-AWS_ACCOUNT_ID="your-aws-account-id"
-ECR_REPOSITORY_NAME="your-ecr-repository-name"
+DOCKER_IMAGE_NAME=""
+DOCKER_IMAGE_TAG=""
+AWS_REGION=""
+AWS_ACCOUNT_ID=""
+ECR_REPOSITORY_NAME=""
 
 # Step 1: Build the Docker image
 docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .

@@ -431,9 +431,20 @@ def run_pdf_scraping(
     # Start the timer
     start_time = time.time()
 
+
+    # TODO: 
+
+    # if all pdfs are already inside of a folder, you can bypass running download_all_pdfs
+
+
     # takes about 2 min to download all files from url for Clark County
     save_dir = download_all_pdfs(url)
     print("Done downloading all pdfs")
+
+
+
+
+
 
     # list all local pdfs
     file_list = list_files(path=save_dir, append_base_path=False)
