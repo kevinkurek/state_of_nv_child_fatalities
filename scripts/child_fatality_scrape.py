@@ -277,7 +277,9 @@ def loop_pdf_scrape(
     df_list = []
     for pdf_file in file_list:
         # make sure full directory is appended before opening
-        full_file_path = path + "/" + pdf_file
+        # full_file_path = path + "/" + pdf_file
+        full_file_path = os.path.join(path, pdf_file)
+
 
         with pdfplumber.open(full_file_path) as pdf:
             # Extract text from each page
