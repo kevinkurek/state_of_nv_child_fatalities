@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 
 # run for Clark, Washoe, and Rural Nevada
-def main(URL_based_run=True):
+def main(URL_based_run=CONFIG.URL_based_run):
     # Start the timer
     start_time = time.time()
 
@@ -50,8 +50,5 @@ def main(URL_based_run=True):
 
 
 if __name__ == "__main__":
-    # return_value = main(URL_based_run=True)
-    # print(return_value)
-
-    return_value = main(URL_based_run=False)
+    return_value = main(URL_based_run=CONFIG.URL_based_run)
     print(return_value)

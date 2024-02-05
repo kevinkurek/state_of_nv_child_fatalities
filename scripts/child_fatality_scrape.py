@@ -242,8 +242,20 @@ def scrape_individual_pdf(pages_text: List[str], pdf_file, keys: List[str]) -> p
     df = pd.DataFrame(data, index=[0])
 
     # add original region & pdf file as first columns
-    original_pdf = pdf_file.split("/")[-1] # 2022-04-15_ID_1488030.pdf
-    original_region = pdf_file.split("/")[-2].split("_")[0] # Clark, Washoe, Rural
+
+    if CONFIG.URL_based_run:
+
+        # Original design MacOS/Docker
+        original_pdf = pdf_file.split("/")[-1] # 2022-04-15_ID_1488030.pdf
+        original_region = pdf_file.split("/")[-2].split("_")[0] # Clark, Washoe, Rural
+
+    else:
+        # Design for Windows & pre-made folder scrape
+        original_pdf = os.path.basename(pdf_file)
+        directory = os.path.dirname(pdf_file)
+        directory_parts = directory.split(os.path.sep)
+        original_region = directory_parts[-2]
+
     df.insert(0, "original_pdf", original_pdf)
     df.insert(0, "original_region", original_region)
 
@@ -500,10 +512,22 @@ def run_pdf_scraping_FOLDER(
 
     pdf_files_list = full_data_path_prep(county_folder)
 
-    # TODO: Temp Kev_Dev directory for storing a list of dataframes
     save_dir = os.path.join(county_folder, "Kev_Dev")
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
+
+    # TODO: Need to copy all files from pdf_file_list into Kev_Dev
+        
+
+
+
+
+        # Right now you manually copied 2023 into Kev_Dev during development
+        # but won't work in production
+
+
+     #   
+
 
     # scrape each individual pdf from file_list: takes about 35 seconds for Clark County
     df_list = loop_pdf_scrape(pdf_files_list, path=save_dir, keys=keys)
