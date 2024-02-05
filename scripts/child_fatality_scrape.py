@@ -281,6 +281,17 @@ def loop_pdf_scrape(
         full_file_path = os.path.join(path, pdf_file)
 
 
+
+
+
+        # BUG: pdf_file not being saved into temporary Kev_Dev Directory inside county-level folders
+
+
+
+
+
+
+
         with pdfplumber.open(full_file_path) as pdf:
             # Extract text from each page
             pages_text = [page.extract_text() for page in pdf.pages]
