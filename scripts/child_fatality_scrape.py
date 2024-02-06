@@ -486,12 +486,13 @@ def run_pdf_scraping_URL(
 
 def full_data_path_prep(county_folder, test_year='2023'):
 
+    # gets all years inside of the county folder
     all_years_list = os.listdir(county_folder)
-    # print(all_years_list)
 
     for year_folder in all_years_list:
         # print(year_folder)
 
+        # TODO: temporary dev on only a single year
         if year_folder == test_year:
 
             county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
@@ -499,6 +500,18 @@ def full_data_path_prep(county_folder, test_year='2023'):
             # Use a list comprehension to filter for files with a ".pdf" extension
             all_county_year_items = os.listdir(county_year_path)
             pdf_files_list = [item for item in all_county_year_items if item.lower().endswith('.pdf')]
+
+            # TODO: copy all files into the Kev_Dev directory
+
+
+
+
+
+            # This directory will be the singular directory of all files
+
+
+
+            
 
     return pdf_files_list
 
