@@ -486,10 +486,10 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
     kev_dev_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, "Kev_Dev")
 
     for year_folder in all_years_list:
-        print(f"copying {county_folder} {year_folder} to {county_folder}/Kev_Dev")
 
         # subset to years we want to move to Kev_Dev
         if year_folder in test_years:
+            print(f"copying {county_folder} {year_folder} to {county_folder}/Kev_Dev")
 
             county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
 
@@ -500,7 +500,38 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
             for file_name in os.listdir(county_year_path):
                 file_path = os.path.join(county_year_path, file_name)
                 if os.path.isfile(file_path):
-                    shutil.copy(file_path, kev_dev_path)
+                    shutil.copy(file_path, kev_dev_path) # Save to analytics folder
+
+
+                    # TODO: shouldn't save these in two spots, reconcile later
+                    # save files to ./output_files/county_pdfs for prior_history merging
+                    directory = os.path.dirname(kev_dev_path)
+                    directory_parts = directory.split(os.path.sep)
+                    county = directory_parts[-1]
+
+                    # save PDFs to temp output_file location to blend with rest of code
+                    save_dir = os.path.join(".", "output_files", f"{county}_pdfs")
+                    if not os.path.exists(kev_dev_path):
+                        print(f"Making Directory: {save_dir}")
+                        os.makedirs(save_dir)
+                    shutil.copy(file_path, save_dir) # save to temp ./output_files/county_pdfs
+                    
+
+        # BUG: File is is not saving above during DEBUG session
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # Get a list of all the files now inside Kev_Dev for processing
     all_kev_dev_files = os.listdir(kev_dev_path)

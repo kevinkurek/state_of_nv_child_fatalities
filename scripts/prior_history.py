@@ -70,6 +70,26 @@ def turn_pdf_counts_into_dataframe(pdf_paths):
 
     # Reassign the DataFrame with the new column order
     df = df[new_column_order]
+
+
+
+    # TODO: above code seems not to be working due to string splitting differences between
+    # operating systems potentially.
+
+    # check if output_files is inside original_region and if it is manipulate dataframe
+    contains_output_file_naming = (df['original_region'].str.contains('output_files')).any()
+
+    if contains_output_file_naming:
+
+        # create temp county column which will replace "original_region" column
+        df['county'] = df['original_pdf'].str.split('_').str[0]
+
+        # create temp pdf file column which will replace "original_pdf" column
+        df['pdf_file'] = df['original_pdf'].str.split('\\').str[-1]
+
+        # replace columns
+        df['original_region'] = df['county']
+        df['original_pdf'] = df['pdf_file']
     
     return df
 
@@ -111,20 +131,6 @@ def merge_and_save_csv(directory):
         ('Clark_pdfs_prior_counts.csv', 'child_fatality_Clark.csv')
     ]
 
-    # BUG: Does not work for FOLDER implementation for merging
-
-
-
-
-
-
-
-
-
-
-
-
-
     # Append the directory to each file in the tuple pairs and update the region name extraction
     files_to_merge_with_path = [
         (os.path.join(directory, file1), os.path.join(directory, file2), file1.split('_')[0])
@@ -148,13 +154,13 @@ def merge_and_save_csv(directory):
     # df_prior_counts
         
         # original_region                          original_pdf  prior_cases_count
-    # 0    output_files         Rural_pdfs\1453180_5_2_23.pdf                  8
-    # 1    output_files  Rural_pdfs\1462383_60_day_update.pdf                  0
+        #   output_files         Rural_pdfs\1453180_5_2_23.pdf                  8
+        #   output_files  Rural_pdfs\1462383_60_day_update.pdf                  0
         
         # df_child_fatality
 
         # original_region                original_pdf
-        #    Rural                          1453180_5_2_23.pdf
+        #    Rural                     1453180_5_2_23.pdf
 
 
 
