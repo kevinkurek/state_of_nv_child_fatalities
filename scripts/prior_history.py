@@ -108,6 +108,20 @@ def merge_and_save_csv(directory):
         ('Clark_pdfs_prior_counts.csv', 'child_fatality_Clark.csv')
     ]
 
+    # BUG: Does not work for FOLDER implementation for merging
+
+
+
+
+
+
+
+
+
+
+
+    
+
     # Append the directory to each file in the tuple pairs and update the region name extraction
     files_to_merge_with_path = [
         (os.path.join(directory, file1), os.path.join(directory, file2), file1.split('_')[0])

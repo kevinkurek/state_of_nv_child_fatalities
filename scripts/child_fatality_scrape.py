@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 import pdfplumber
 import zipcodes
+import shutil
 from typing import List, Dict, Optional
 import config.CONFIG as CONFIG
 
@@ -246,6 +247,7 @@ def scrape_individual_pdf(pages_text: List[str], pdf_file, keys: List[str]) -> p
     if CONFIG.URL_based_run:
 
         # Original design MacOS/Docker
+        print(pdf_file)
         original_pdf = pdf_file.split("/")[-1] # 2022-04-15_ID_1488030.pdf
         original_region = pdf_file.split("/")[-2].split("_")[0] # Clark, Washoe, Rural
 
@@ -484,36 +486,34 @@ def run_pdf_scraping_URL(
     print(f"Execution time for {county}: {round(elapsed_time,2)} seconds")
 
 
-def full_data_path_prep(county_folder, test_year='2023'):
-
-    # gets all years inside of the county folder
+def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
+    # Gets all years inside of the county folder
     all_years_list = os.listdir(county_folder)
 
     for year_folder in all_years_list:
-        # print(year_folder)
 
-        # TODO: temporary dev on only a single year
-        if year_folder == test_year:
+        # subset to years we want to move to Kev_Dev
+        if year_folder in test_years:
 
             county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
-
-            # Use a list comprehension to filter for files with a ".pdf" extension
-            all_county_year_items = os.listdir(county_year_path)
-            pdf_files_list = [item for item in all_county_year_items if item.lower().endswith('.pdf')]
-
-            # TODO: copy all files into the Kev_Dev directory
-
-
-
-
-
-            # This directory will be the singular directory of all files
-
-
-
             
+            # New path to copy files
+            kev_dev_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, "Kev_Dev")
 
-    return pdf_files_list
+            # Create the new directory if it doesn't exist
+            os.makedirs(kev_dev_path, exist_ok=True)
+
+            # Copy all files from county_year_path to Kev_Dev directory
+            for file_name in os.listdir(county_year_path):
+                file_path = os.path.join(county_year_path, file_name)
+                if os.path.isfile(file_path):
+                    shutil.copy(file_path, kev_dev_path)
+
+    # Get a list of all the files now inside Kev_Dev for processing
+    all_kev_dev_files = os.listdir(kev_dev_path)
+    pdf_files_list = [item for item in all_kev_dev_files if item.lower().endswith('.pdf')]
+
+    return pdf_files_list, kev_dev_path
 
 
 def run_pdf_scraping_FOLDER(
@@ -523,24 +523,9 @@ def run_pdf_scraping_FOLDER(
     # Start the timer
     start_time = time.time()
 
-    pdf_files_list = full_data_path_prep(county_folder)
+    pdf_files_list, kev_dev_path = full_data_path_prep(county_folder)
 
-    save_dir = os.path.join(county_folder, "Kev_Dev")
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-
-    # TODO: Need to copy all files from pdf_file_list into Kev_Dev
-        
-
-
-
-
-        # Right now you manually copied 2023 into Kev_Dev during development
-        # but won't work in production
-
-
-     #   
-
+    save_dir = kev_dev_path
 
     # scrape each individual pdf from file_list: takes about 35 seconds for Clark County
     df_list = loop_pdf_scrape(pdf_files_list, path=save_dir, keys=keys)
@@ -575,12 +560,12 @@ if __name__ == "__main__":
     # from state_of_
 
     # Rural (smallest to debug on)
-    run_pdf_scraping(
-        url=CONFIG.URL2,
-        keys=CONFIG.KEYS,
-        rename_cols=CONFIG.RENAME_COLS,
-        time_cols=CONFIG.TIME_COLS,
-    )
+    # run_pdf_scraping(
+    #     url=CONFIG.URL2,
+    #     keys=CONFIG.KEYS,
+    #     rename_cols=CONFIG.RENAME_COLS,
+    #     time_cols=CONFIG.TIME_COLS,
+    # )
 
     # Clark
     # run(url=config.URL1,

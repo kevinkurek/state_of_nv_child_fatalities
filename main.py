@@ -27,8 +27,8 @@ def main(URL_based_run=CONFIG.URL_based_run):
         print("Running main from FULL_DATA_PATH")
 
         for county_folder in CONFIG.FULL_PATH_COUNTIES:
-            # print(county_folder)
-            # print(f"Getting info from: {county_folder}")
+            print(county_folder)
+            print(f"Getting info from: {county_folder}")
 
             run_pdf_scraping_FOLDER(
                 county_folder=county_folder,
@@ -50,5 +50,10 @@ def main(URL_based_run=CONFIG.URL_based_run):
 
 
 if __name__ == "__main__":
+
+    # load environment variables
+    load_dotenv('.env')
+
+    # run main()
     return_value = main(URL_based_run=CONFIG.URL_based_run)
     print(return_value)
