@@ -244,19 +244,22 @@ def scrape_individual_pdf(pages_text: List[str], pdf_file, keys: List[str]) -> p
 
     # add original region & pdf file as first columns
 
-    if CONFIG.URL_based_run:
-
-        # Original design MacOS/Docker
-        print(pdf_file)
+    # TODO: Original MacOS/Docker design, needs to be refactored to be OS independent
+    try:
+        # Original design MacOS/Docker for URL-based scrape
         original_pdf = pdf_file.split("/")[-1] # 2022-04-15_ID_1488030.pdf
         original_region = pdf_file.split("/")[-2].split("_")[0] # Clark, Washoe, Rural
 
-    else:
-        # Design for Windows & pre-made folder scrape
+    except:
+        # Design for Windows & local pre-made folder scrape
         original_pdf = os.path.basename(pdf_file)
         directory = os.path.dirname(pdf_file)
         directory_parts = directory.split(os.path.sep)
         original_region = directory_parts[-2]
+
+    else:
+        print("Failure inside: child_fatality_scrape.scrape_individual_pdf()")
+        
 
     df.insert(0, "original_pdf", original_pdf)
     df.insert(0, "original_region", original_region)
@@ -487,8 +490,12 @@ def run_pdf_scraping_URL(
 
 
 def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
+
     # Gets all years inside of the county folder
     all_years_list = os.listdir(county_folder)
+
+    # New path to copy files to
+    kev_dev_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, "Kev_Dev")
 
     for year_folder in all_years_list:
 
@@ -496,9 +503,6 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
         if year_folder in test_years:
 
             county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
-            
-            # New path to copy files
-            kev_dev_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, "Kev_Dev")
 
             # Create the new directory if it doesn't exist
             os.makedirs(kev_dev_path, exist_ok=True)
