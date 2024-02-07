@@ -27,7 +27,10 @@ def count_dates_in_g_section(pdf_data):
     dates = date_pattern.findall(section_g_text)
 
     # kevin intervention, ChatGPT cannot see multi-line 0400 12/03/2021 date from footer, simply subtract 1
-    total_dates = len(dates) - 1
+    if len(dates)==0:
+        total_dates = len(dates)
+    else:
+        total_dates = len(dates) - 1
 
     return total_dates
 
@@ -120,7 +123,7 @@ def merge_and_save_csv(directory):
 
 
 
-    
+
 
     # Append the directory to each file in the tuple pairs and update the region name extraction
     files_to_merge_with_path = [
@@ -133,6 +136,33 @@ def merge_and_save_csv(directory):
         # Read the DataFrames from the files
         df_prior_counts = pd.read_csv(prior_counts_file)
         df_child_fatality = pd.read_csv(child_fatality_file)
+
+
+
+
+        ### BUG: original_region in df_prior_counts is now "output_files" rather than county
+
+
+        # so they are not merging properly
+
+    # df_prior_counts
+        
+        # original_region                          original_pdf  prior_cases_count
+    # 0    output_files         Rural_pdfs\1453180_5_2_23.pdf                  8
+    # 1    output_files  Rural_pdfs\1462383_60_day_update.pdf                  0
+        
+        # df_child_fatality
+
+        # original_region                original_pdf
+        #    Rural                          1453180_5_2_23.pdf
+
+
+
+        ###
+
+
+
+
         
         # Merge the DataFrames on 'original_region' and 'original_pdf'
         merged_df = pd.merge(df_child_fatality, 

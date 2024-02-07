@@ -297,18 +297,6 @@ def loop_pdf_scrape(
         # full_file_path = path + "/" + pdf_file
         full_file_path = os.path.join(path, pdf_file)
 
-
-
-
-
-        # BUG: pdf_file not being saved into temporary Kev_Dev Directory inside county-level folders
-
-
-
-
-
-
-
         with pdfplumber.open(full_file_path) as pdf:
             # Extract text from each page
             pages_text = [page.extract_text() for page in pdf.pages]
@@ -498,6 +486,7 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
     kev_dev_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, "Kev_Dev")
 
     for year_folder in all_years_list:
+        print(f"copying {county_folder} {year_folder} to {county_folder}/Kev_Dev")
 
         # subset to years we want to move to Kev_Dev
         if year_folder in test_years:

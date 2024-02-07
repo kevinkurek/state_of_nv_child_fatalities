@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 # Load the environment variables from the .env file
 load_dotenv('.env')
 FULL_DATA_PATH = os.getenv("FULL_DATA_PATH")# Full config for main.py
-URL_based_run=True
+URL_based_run=False
 
 # used in main to run all urls
 URL_LIST = [
