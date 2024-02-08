@@ -489,7 +489,7 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
 
         # subset to years we want to move to Kev_Dev
         if year_folder in test_years:
-            print(f"copying {county_folder} {year_folder} to {county_folder}/Kev_Dev")
+            # print(f"copying {county_folder} {year_folder} to {county_folder}\Kev_Dev")
 
             county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
 
@@ -511,27 +511,10 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
 
                     # save PDFs to temp output_file location to blend with rest of code
                     save_dir = os.path.join(".", "output_files", f"{county}_pdfs")
-                    if not os.path.exists(kev_dev_path):
+                    if not os.path.exists(save_dir):
                         print(f"Making Directory: {save_dir}")
                         os.makedirs(save_dir)
                     shutil.copy(file_path, save_dir) # save to temp ./output_files/county_pdfs
-                    
-
-        # BUG: File is is not saving above during DEBUG session
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     # Get a list of all the files now inside Kev_Dev for processing
     all_kev_dev_files = os.listdir(kev_dev_path)

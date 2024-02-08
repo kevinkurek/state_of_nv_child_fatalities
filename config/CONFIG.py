@@ -14,13 +14,13 @@ URL_LIST = [
 ]
 
 # scrape years when URL_based_run=False
-SCRAPE_YEARS = [2023, 2022]
+SCRAPE_YEARS = ['2022', '2023']
 
 # TODO: bad practice to have python inside config, but ok for dev/debugging
 FULL_PATH_COUNTIES = [
     os.path.join(fr"{FULL_DATA_PATH}", "Clark"),
     os.path.join(fr"{FULL_DATA_PATH}", "Rural"),
-    os.path.join(fr"{FULL_DATA_PATH}", "Clark"),
+    os.path.join(fr"{FULL_DATA_PATH}", "Washoe"),
 ]  # used in main to run all folder paths if given
 
 # Define the keys you want to extract
