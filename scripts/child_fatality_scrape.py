@@ -296,6 +296,7 @@ def loop_pdf_scrape(
         # make sure full directory is appended before opening
         # full_file_path = path + "/" + pdf_file
         full_file_path = os.path.join(path, pdf_file)
+        # print(full_file_path)
 
         with pdfplumber.open(full_file_path) as pdf:
             # Extract text from each page
@@ -489,6 +490,7 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
 
         # subset to years we want to move to Kev_Dev
         if year_folder in test_years:
+            print(year_folder)
             # print(f"copying {county_folder} {year_folder} to {county_folder}\Kev_Dev")
 
             county_year_path = os.path.join(CONFIG.FULL_DATA_PATH, county_folder, year_folder)
