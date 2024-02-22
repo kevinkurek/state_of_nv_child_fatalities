@@ -3,7 +3,6 @@ import pytest
 from unittest.mock import MagicMock, patch
 import requests
 from ..scripts.child_fatality_scrape import (
-    download_all_pdfs,
     list_files,
     restructure_alphabetical_dict,
     merge_dicts,
