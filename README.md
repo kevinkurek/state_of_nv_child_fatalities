@@ -20,6 +20,7 @@ $ tox                                           # run tox: installs requirements
       ├───research                            # original exploration and debugging
       ├───scripts                             # actual python code
           ├─── child_fatality_scraper.py      # core file
+          ├─── prior_history.py               # gets number of past calls on child
       ├───tests                               # unit tests of python functions
       ├── main.py                             # file that runs python code in scripts folder
       ├── requirements.txt                    # package requirements

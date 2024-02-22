@@ -503,7 +503,7 @@ def full_data_path_prep(county_folder, test_years=CONFIG.SCRAPE_YEARS):
                     shutil.copy(file_path, kev_dev_path) # Save to analytics folder
 
 
-                    # TODO: shouldn't save these in two spots, reconcile later
+                    # TODO: shouldn't have to save these in two spots, reconcile later
                     # save files to ./output_files/county_pdfs for prior_history merging
                     directory = os.path.dirname(kev_dev_path)
                     directory_parts = directory.split(os.path.sep)

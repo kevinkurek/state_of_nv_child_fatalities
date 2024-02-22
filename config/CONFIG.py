@@ -14,7 +14,7 @@ URL_LIST = [
 ]
 
 # scrape years when URL_based_run=False
-SCRAPE_YEARS = ['2022', '2023']
+SCRAPE_YEARS = ['2020', '2021', '2022', '2023']
 
 # TODO: bad practice to have python inside config, but ok for dev/debugging
 FULL_PATH_COUNTIES = [
