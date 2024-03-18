@@ -11,20 +11,21 @@ $ pip install tox                               # install tox
 $ tox                                           # run tox: installs requirements.txt & runs pytests
 ```
 ### Local Run
+`CONFIG.py - change values like SCRAPE_YEARS to additional years`
 `$ python main.py  # run primary pdf scraper per county (don't need virtual env to run this)`
 ### Directory Structure
 ```
 ├── state_of_nv_child_fatalities
       ├───config                              # hardcoded urls, paths and values
+          ├─── CONFIG.py                      # Change values in here
       ├───output_files                        # output csv and pdfs
       ├───research                            # original exploration and debugging
       ├───scripts                             # actual python code
           ├─── child_fatality_scraper.py      # core file
           ├─── prior_history.py               # gets number of past calls on child
       ├───tests                               # unit tests of python functions
-      ├── main.py                             # file that runs python code in scripts folder
       ├── requirements.txt                    # package requirements
-      ├── tox.ini                             # Test runner for multi-environment Python testing
+      ├── tox.ini                             # Multi-environment Python testing
       └── Dockerfile                          # Docker build image, run tox, execute main.py
 ```
 
@@ -38,6 +39,9 @@ $ tox                                           # run tox: installs requirements
 `output_files/child_fatality_Clark.csv`
 
 ![image](https://github.com/kevinkurek/state_of_nv_child_fatalities/assets/28911996/9360689d-e655-43f3-98ce-4a8891274e6c)
+
+
+### Still in DEV below this line for GCP/AWS workflow.
 
 ### Docker Instructions
 
@@ -65,7 +69,6 @@ Remove any dangling/unused images:
 $ docker system prune -a -f
 ```
 
-### Still in Dev for GCP ideal workflow (below this line.)
 ### Upload to Google Cloud Platform (GCP)
 Note: Google's Container Registry is being deprecated so now images will now live in Artifact Registry.
 ```

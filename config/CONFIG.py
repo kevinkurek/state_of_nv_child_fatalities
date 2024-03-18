@@ -14,7 +14,7 @@ URL_LIST = [
 ]
 
 # scrape years when URL_based_run=False
-SCRAPE_YEARS = ['2020', '2021', '2022', '2023'] # '2017', '2018', '2020', '2021', '2022', '2023'
+SCRAPE_YEARS = ['2021', '2022', '2023']
 
 # TODO: bad practice to have python inside config, but ok for dev/debugging
 FULL_PATH_COUNTIES = [
@@ -60,8 +60,3 @@ TIME_COLS = [
     "child_fatality_date_of_death",
     "near_fatality_date",
 ]
-
-# Config for childfatalityscrape.py debugging a single url
-URL1 = "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Clark/"
-URL2 = "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Rural/"
-URL3 = "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Washoe/"
