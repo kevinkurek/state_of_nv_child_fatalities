@@ -11,8 +11,8 @@ $ pip install tox                               # install tox
 $ tox                                           # run tox: installs requirements.txt & runs pytests
 ```
 ### Local Run
-`CONFIG.py - change values like SCRAPE_YEARS to additional years`
-`$ python main.py  # run primary pdf scraper per county (don't need virtual env to run this)`
+1. `CONFIG.py - can change values like SCRAPE_YEARS to additional years`
+2. `$ python main.py  # run primary pdf scraper per county (don't need virtual env to run this)`
 ### Directory Structure
 ```
 ├── state_of_nv_child_fatalities
