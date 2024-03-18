@@ -4,7 +4,20 @@ from dotenv import load_dotenv
 # Load the environment variables from the .env file
 load_dotenv('.env')
 FULL_DATA_PATH = os.getenv("FULL_DATA_PATH")# Full config for main.py
+
+
+
+###### CHANGEABLE VARIABLES
+
+SCRAPE_YEARS = ['2021', '2022', '2023']
 URL_based_run=False
+
+######
+
+
+
+
+# Built for Kevin Development, shouldn't have to change ever.
 
 # used in main to run all urls
 URL_LIST = [
@@ -12,9 +25,6 @@ URL_LIST = [
     "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Rural/",
     "https://dcfs.nv.gov/Programs/CWS/CPS/ChildFatalities/Washoe/",
 ]
-
-# scrape years when URL_based_run=False
-SCRAPE_YEARS = ['2021', '2022', '2023']
 
 # TODO: bad practice to have python inside config, but ok for dev/debugging
 FULL_PATH_COUNTIES = [
